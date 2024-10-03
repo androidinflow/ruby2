@@ -1,5 +1,5 @@
 {
-	"name": "mongo-client",
+	"name": "red-candy",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -19,8 +19,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"bits-ui": "^0.21.15",
+		"bits-ui": "^0.21.16",
 		"clsx": "^2.1.1",
+		"lucide-svelte": "^0.447.0",
 		"mongodb": "^6.9.0",
 		"svelte-legos": "^0.2.5",
 		"svelte-radix": "^1.1.1",
