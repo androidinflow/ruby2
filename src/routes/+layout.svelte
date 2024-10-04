@@ -54,7 +54,11 @@
   </div>
 
   <div class="flex items-center space-x-4">
-    <Button variant="outline" class="hidden md:inline-flex items-center gap-2">
+    <Button
+      variant="outline"
+      class="hidden md:inline-flex items-center gap-2"
+      href="/account/login"
+    >
       <LogIn size={18} />
       Login
     </Button>
@@ -81,7 +85,11 @@
           {item.label}
         </Button>
       {/each}
-      <Button variant="outline" class="w-full mb-2 flex items-center gap-2">
+      <Button
+        variant="outline"
+        class="w-full mb-2 flex items-center gap-2"
+        href="/account/login"
+      >
         <LogIn size={18} />
         Login
       </Button>
