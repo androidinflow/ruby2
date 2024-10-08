@@ -7,6 +7,7 @@
   import * as Sheet from "$lib/components/ui/sheet";
   import { afterNavigate } from "$app/navigation";
   import { Separator } from "$lib/components/ui/separator";
+  import { user } from "$lib/stores/user.store";
 
   $: pageTitle = $page.url.pathname === "/" ? "Home" : "Red Candy";
   let isSheetOpen = false;
@@ -54,14 +55,22 @@
   </div>
 
   <div class="flex items-center space-x-4">
-    <Button
-      variant="outline"
-      class="hidden md:inline-flex items-center gap-2"
-      href="/account/login"
-    >
-      <LogIn size={18} />
-      Login
-    </Button>
+    {#if $user}
+      <form action="/account/logout" method="POST">
+        <li>
+          <button type="submit">Logout</button>
+        </li>
+      </form>
+    {:else}
+      <Button
+        variant="outline"
+        class="hidden md:inline-flex items-center gap-2"
+        href="/account/login"
+      >
+        <LogIn size={18} />
+        Login
+      </Button>
+    {/if}
     <ThemeToggle />
   </div>
 </nav>
@@ -85,14 +94,22 @@
           {item.label}
         </Button>
       {/each}
-      <Button
-        variant="outline"
-        class="w-full mb-2 flex items-center gap-2"
-        href="/account/login"
-      >
-        <LogIn size={18} />
-        Login
-      </Button>
+      {#if $user}
+        <form action="/account/logout" method="POST">
+          <li>
+            <button type="submit">Logout now</button>
+          </li>
+        </form>
+      {:else}
+        <Button
+          variant="outline"
+          class="w-full mb-2 flex items-center gap-2"
+          href="/account/login"
+        >
+          <LogIn size={18} />
+          Login
+        </Button>
+      {/if}
     </div>
     <Sheet.Footer>
       <Button variant="outline" on:click={() => (isSheetOpen = false)}

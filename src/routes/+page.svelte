@@ -8,8 +8,11 @@
     TabsContent,
   } from "$lib/components/ui/tabs";
   import { ChevronUp, Image, Wand2 } from "lucide-svelte";
+  import { user } from "$lib/stores/user.store";
 
   let prompt = "";
+
+  $: console.log("Current user:", $user);
 </script>
 
 <div class="min-h-screen bg-gradient-to-br from-background to-secondary/10">
@@ -49,6 +52,29 @@
         </div>
       </div>
     </div>
+
+    <section class="max-w-3xl mx-auto mb-12 bg-card rounded-xl shadow-lg p-6">
+      <div class="flex items-center mb-4">
+        <h2 class="text-2xl font-semibold">User Information</h2>
+      </div>
+      {#if $user}
+        <p>Welcome, {$user.name || $user.email}!</p>
+        {#if $user.avatarUrl}
+          <img
+            src={$user.avatarUrl}
+            alt="User avatar"
+            class="w-16 h-16 rounded-full mt-2"
+          />
+        {/if}
+      {:else}
+        <p>
+          You are not logged in. <a
+            href="/account/login"
+            class="text-primary hover:underline">Log in here</a
+          >.
+        </p>
+      {/if}
+    </section>
 
     <div class="flex flex-wrap justify-center gap-4 mb-16">
       <Button variant="outline" class="rounded-full">E-commerce</Button>

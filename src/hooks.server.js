@@ -42,6 +42,11 @@ export const handle = async ({ event, resolve }) => {
     if (event.locals.user && event.locals.user.expand?.tel) {
       event.locals.user.tel = event.locals.user.expand.tel;
     }
+
+    // Log the user if they exist
+    if (event.locals.user) {
+      console.log("Logged in user:", event.locals.user);
+    }
   } catch (error) {
     // Instead of logging an error, just set user to null
     event.locals.user = null;
