@@ -11,6 +11,7 @@
     LogIn,
     Candy,
     LogOut,
+    Swords,
   } from "lucide-svelte";
   import * as Sheet from "$lib/components/ui/sheet";
   import { afterNavigate } from "$app/navigation";
@@ -26,6 +27,7 @@
     { label: "Projects", icon: Briefcase },
 
     { label: "Candy", icon: Candy, href: "/candy" },
+    { label: "Clash", icon: Swords, href: "/clash" },
   ];
 
   afterNavigate(() => {
@@ -57,6 +59,32 @@
   </div>
 
   <div class="flex items-center space-x-4">
+    {#if $user}
+      <div class="hidden md:flex items-center space-x-3">
+        <div class="relative">
+          {#if $user.avatarUrl}
+            <img
+              src={$user.avatarUrl}
+              alt="User avatar"
+              class="w-10 h-10 rounded-full border-2 border-primary"
+            />
+          {:else}
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-primary to-secondary text-white rounded-full flex items-center justify-center font-bold text-lg"
+            >
+              {$user.email[0].toUpperCase()}
+            </div>
+          {/if}
+          <div
+            class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background"
+          ></div>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm font-semibold">{$user.name || "User"}</span>
+          <span class="text-xs text-muted-foreground">{$user.email}</span>
+        </div>
+      </div>
+    {/if}
     <Button
       variant="ghost"
       class="md:hidden"
@@ -94,11 +122,29 @@
   <Sheet.Content side="right" class="w-[250px] sm:w-[300px] bg-card">
     <Sheet.Header class="border-b border-border p-4">
       <Sheet.Title class="text-xl font-bold">Menu</Sheet.Title>
-      <Sheet.Description class="text-sm text-muted-foreground"
-        >Explore our app</Sheet.Description
-      >
+      <Sheet.Description class="text-sm text-muted-foreground">
+        Explore our app
+      </Sheet.Description>
     </Sheet.Header>
     <nav class="p-4 space-y-2">
+      {#if $user}
+        <div class="flex items-center space-x-2 mb-4">
+          {#if $user.avatarUrl}
+            <img
+              src={$user.avatarUrl}
+              alt="User avatar"
+              class="w-8 h-8 rounded-full"
+            />
+          {:else}
+            <div
+              class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center"
+            >
+              {$user.email[0].toUpperCase()}
+            </div>
+          {/if}
+          <span class="text-sm md:text-base truncate">{$user.email}</span>
+        </div>
+      {/if}
       {#each navItems as item}
         <a
           href={item.href}

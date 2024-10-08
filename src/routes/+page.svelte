@@ -17,33 +17,39 @@
 
 <div class="min-h-screen bg-gradient-to-br from-background to-secondary/10">
   <main class="container mx-auto px-4 py-12">
-    <div class="max-w-3xl mx-auto mb-12 bg-card rounded-xl shadow-lg p-6">
-      <div class="flex items-center mb-4">
-        <Wand2 class="w-6 h-6 mr-2 text-primary" />
-        <h2 class="text-2xl font-semibold">Create Your Innovative Design</h2>
+    <div
+      class="max-w-3xl lg:max-w-5xl mx-auto mb-12 bg-card rounded-xl shadow-lg p-6 lg:p-8"
+    >
+      <div class="flex items-center mb-4 lg:mb-6">
+        <Wand2 class="w-14 h-14 lg:w-8 lg:h-8 mr-2 lg:mr-3 text-primary" />
+        <h2 class="text-2xl lg:text-3xl font-semibold">
+          Create Your Innovative Design
+        </h2>
       </div>
       <Input
         bind:value={prompt}
         placeholder="Describe your visionary UI (e.g., A cutting-edge dashboard for a revolutionary fitness app)"
-        class="mb-4"
+        class="mb-4 lg:mb-6 lg:text-lg"
       />
-      <div class="flex flex-col sm:flex-row gap-4">
-        <Button variant="outline" class="gap-2 flex-1 sm:flex-none">
-          <Image class="w-4 h-4" />
+      <div class="flex flex-col sm:flex-row gap-4 lg:gap-6">
+        <Button variant="outline" class="gap-2 flex-1 sm:flex-none lg:text-lg">
+          <Image class="w-4 h-4 lg:w-5 lg:h-5" />
           Upload Inspirational Image
         </Button>
-        <div class="flex gap-2 flex-1">
-          <Button variant="secondary" class="flex-1">Swift</Button>
-          <Button variant="secondary" class="flex-1">Comprehensive</Button>
-          <Button variant="default" class="gap-2 flex-1">
+        <div class="flex gap-2 lg:gap-4 flex-1">
+          <Button variant="secondary" class="flex-1 lg:text-lg">Swift</Button>
+          <Button variant="secondary" class="flex-1 lg:text-lg"
+            >Comprehensive</Button
+          >
+          <Button variant="default" class="gap-2 flex-1 lg:text-lg">
             Innovate
-            <ChevronUp class="w-4 h-4" />
+            <ChevronUp class="w-4 h-4 lg:w-5 lg:h-5" />
           </Button>
         </div>
       </div>
     </div>
 
-    <section class="max-w-3xl mx-auto mb-12 bg-card rounded-xl shadow-lg p-6">
+    <!-- <section class="max-w-3xl mx-auto mb-12 bg-card rounded-xl shadow-lg p-6">
       <div class="flex items-center mb-4">
         <h2 class="text-2xl font-semibold">Visionary Profile</h2>
       </div>
@@ -65,7 +71,7 @@
           >.
         </p>
       {/if}
-    </section>
+    </section> -->
 
     <div class="flex flex-wrap justify-center gap-4 mb-16">
       <Button variant="outline" class="rounded-full text-primary"
@@ -85,7 +91,7 @@
     <section class="bg-card rounded-xl shadow-lg p-6 mb-12">
       <h2 class="text-3xl font-bold mb-6">Explore Groundbreaking Designs</h2>
       <Tabs value="new">
-        <TabsList class="w-full mb-6">
+        <TabsList class="w-full md:w-2/3 lg:w-1/2 mx-auto mb-6">
           <TabsTrigger value="new" class="flex-1"
             >Cutting-Edge Creations</TabsTrigger
           >
