@@ -17,36 +17,26 @@
 
 <div class="min-h-screen bg-gradient-to-br from-background to-secondary/10">
   <main class="container mx-auto px-4 py-12">
-    <h1
-      class="text-4xl sm:text-5xl font-extrabold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
-    >
-      AI-Powered UI Generation
-    </h1>
-    <p class="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-      Transform your ideas into stunning UI designs with the power of AI and
-      shadcn/ui components.
-    </p>
-
     <div class="max-w-3xl mx-auto mb-12 bg-card rounded-xl shadow-lg p-6">
       <div class="flex items-center mb-4">
         <Wand2 class="w-6 h-6 mr-2 text-primary" />
-        <h2 class="text-2xl font-semibold">Create Your Design</h2>
+        <h2 class="text-2xl font-semibold">Create Your Innovative Design</h2>
       </div>
       <Input
         bind:value={prompt}
-        placeholder="Describe your UI (e.g., A modern dashboard for a fitness app)"
+        placeholder="Describe your visionary UI (e.g., A cutting-edge dashboard for a revolutionary fitness app)"
         class="mb-4"
       />
       <div class="flex flex-col sm:flex-row gap-4">
         <Button variant="outline" class="gap-2 flex-1 sm:flex-none">
           <Image class="w-4 h-4" />
-          Upload Image
+          Upload Inspirational Image
         </Button>
         <div class="flex gap-2 flex-1">
-          <Button variant="secondary" class="flex-1">Rapid</Button>
-          <Button variant="secondary" class="flex-1">Detailed</Button>
+          <Button variant="secondary" class="flex-1">Swift</Button>
+          <Button variant="secondary" class="flex-1">Comprehensive</Button>
           <Button variant="default" class="gap-2 flex-1">
-            Generate
+            Innovate
             <ChevronUp class="w-4 h-4" />
           </Button>
         </div>
@@ -55,58 +45,82 @@
 
     <section class="max-w-3xl mx-auto mb-12 bg-card rounded-xl shadow-lg p-6">
       <div class="flex items-center mb-4">
-        <h2 class="text-2xl font-semibold">User Information</h2>
+        <h2 class="text-2xl font-semibold">Visionary Profile</h2>
       </div>
       {#if $user}
-        <p>Welcome, {$user.name || $user.email}!</p>
+        <p>Welcome, esteemed innovator {$user.name || $user.email}!</p>
         {#if $user.avatarUrl}
           <img
             src={$user.avatarUrl}
-            alt="User avatar"
-            class="w-16 h-16 rounded-full mt-2"
+            alt="Visionary avatar"
+            class="w-16 h-16 rounded-full mt-2 border-2 border-primary"
           />
         {/if}
       {:else}
         <p>
-          You are not logged in. <a
+          You haven't unlocked your full potential yet. <a
             href="/account/login"
-            class="text-primary hover:underline">Log in here</a
+            class="text-primary hover:underline font-bold"
+            >Embark on your journey here</a
           >.
         </p>
       {/if}
     </section>
 
     <div class="flex flex-wrap justify-center gap-4 mb-16">
-      <Button variant="outline" class="rounded-full">E-commerce</Button>
-      <Button variant="outline" class="rounded-full">Landing Page</Button>
-      <Button variant="outline" class="rounded-full">Dashboard</Button>
-      <Button variant="outline" class="rounded-full">Mobile App</Button>
+      <Button variant="outline" class="rounded-full text-primary"
+        >Disruptive E-commerce</Button
+      >
+      <Button variant="outline" class="rounded-full text-primary"
+        >Revolutionary Landing Page</Button
+      >
+      <Button variant="outline" class="rounded-full text-primary"
+        >Futuristic Dashboard</Button
+      >
+      <Button variant="outline" class="rounded-full text-primary"
+        >Next-Gen Mobile App</Button
+      >
     </div>
 
     <section class="bg-card rounded-xl shadow-lg p-6 mb-12">
-      <h2 class="text-3xl font-bold mb-6">Explore Designs</h2>
+      <h2 class="text-3xl font-bold mb-6">Explore Groundbreaking Designs</h2>
       <Tabs value="new">
         <TabsList class="w-full mb-6">
-          <TabsTrigger value="new" class="flex-1">Latest Creations</TabsTrigger>
+          <TabsTrigger value="new" class="flex-1"
+            >Cutting-Edge Creations</TabsTrigger
+          >
           <TabsTrigger value="featured" class="flex-1"
-            >Featured Designs</TabsTrigger
+            >Visionary Designs</TabsTrigger
           >
         </TabsList>
         <TabsContent value="new">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#each Array(6) as _}
+            {#each Array(6) as _, index}
               <div
-                class="bg-secondary/20 aspect-video rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-              ></div>
+                class="aspect-video rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden transform hover:scale-105 transition-transform"
+              >
+                <img
+                  src={`https://picsum.photos/seed/${index + 1}/400/225?grayscale`}
+                  alt="Innovative black and white design"
+                  class="w-full h-full object-cover"
+                />
+              </div>
             {/each}
           </div>
         </TabsContent>
         <TabsContent value="featured">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {#each Array(6) as _}
+            {#each Array(6) as _, index}
               <div
-                class="bg-primary/20 aspect-video rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-              ></div>
+                class="aspect-video rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer overflow-hidden transform hover:scale-105 transition-transform"
+              >
+                <img
+                  src={`https://picsum.photos/seed/${index + 7}/400/225?grayscale&blur=2`}
+                  alt="Revolutionary red and white design"
+                  class="w-full h-full object-cover"
+                  style="filter: sepia(100%) hue-rotate(300deg) saturate(300%)"
+                />
+              </div>
             {/each}
           </div>
         </TabsContent>
@@ -117,14 +131,30 @@
   <footer class="bg-card shadow-inner py-8">
     <div class="container mx-auto px-4">
       <div class="flex flex-wrap justify-center gap-4 mb-4">
-        <Button variant="ghost" size="sm">FAQ</Button>
-        <Button variant="ghost" size="sm">Terms of Service</Button>
-        <Button variant="ghost" size="sm">AI Ethics</Button>
-        <Button variant="ghost" size="sm">Privacy Policy</Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          class="text-primary hover:text-primary-dark">Visionary FAQ</Button
+        >
+        <Button
+          variant="ghost"
+          size="sm"
+          class="text-primary hover:text-primary-dark"
+          >Innovative Terms of Service</Button
+        >
+        <Button
+          variant="ghost"
+          size="sm"
+          class="text-primary hover:text-primary-dark"
+          >Cutting-Edge AI Ethics</Button
+        >
+        <Button
+          variant="ghost"
+          size="sm"
+          class="text-primary hover:text-primary-dark"
+          >Next-Gen Privacy Policy</Button
+        >
       </div>
-      <p class="text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} AI UI Generator. All rights reserved.
-      </p>
     </div>
   </footer>
 </div>

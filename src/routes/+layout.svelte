@@ -3,7 +3,15 @@
   import ThemeToggle from "$lib/components/ThemeToggle.svelte";
   import { page } from "$app/stores";
   import { Button } from "$lib/components/ui/button";
-  import { Menu, Home, Info, Briefcase, LogIn, Candy } from "lucide-svelte";
+  import {
+    Menu,
+    Home,
+    Info,
+    Briefcase,
+    LogIn,
+    Candy,
+    LogOut,
+  } from "lucide-svelte";
   import * as Sheet from "$lib/components/ui/sheet";
   import { afterNavigate } from "$app/navigation";
   import { Separator } from "$lib/components/ui/separator";
@@ -27,19 +35,13 @@
 
 <nav class="bg-background p-4 flex justify-between items-center shadow-sm">
   <div class="flex items-center">
-    <img
-      src="https://static.vecteezy.com/system/resources/thumbnails/027/971/388/small_2x/3d-render-round-warm-orange-fire-flame-icon-realistic-hot-sparks-light-gas-logo-design-for-emoticon-energy-power-ui-png.png"
-      alt="Logo"
-      class="h-8 w-auto mr-4"
-    />
-    <Button
-      variant="ghost"
-      class="md:hidden"
-      on:click={() => (isSheetOpen = true)}
-      aria-label="Open menu"
-    >
-      <Menu size={24} />
-    </Button>
+    <a href="/" class="flex items-center">
+      <img
+        src="https://static.vecteezy.com/system/resources/thumbnails/027/971/388/small_2x/3d-render-round-warm-orange-fire-flame-icon-realistic-hot-sparks-light-gas-logo-design-for-emoticon-energy-power-ui-png.png"
+        alt="Logo"
+        class="h-8 w-auto mr-4"
+      />
+    </a>
     <div class="hidden md:flex items-center space-x-4">
       {#each navItems as item}
         <Button
@@ -55,11 +57,20 @@
   </div>
 
   <div class="flex items-center space-x-4">
+    <Button
+      variant="ghost"
+      class="md:hidden"
+      on:click={() => (isSheetOpen = true)}
+      aria-label="Open menu"
+    >
+      <Menu size={24} />
+    </Button>
     {#if $user}
-      <form action="/account/logout" method="POST">
-        <li>
-          <button type="submit">Logout</button>
-        </li>
+      <form action="/account/logout" method="POST" class="hidden md:block">
+        <Button variant="outline" type="submit" class="flex items-center gap-2">
+          <LogOut size={18} />
+          Logout
+        </Button>
       </form>
     {:else}
       <Button
@@ -71,51 +82,68 @@
         Login
       </Button>
     {/if}
-    <ThemeToggle />
+    <div class="hidden md:block">
+      <ThemeToggle />
+    </div>
   </div>
 </nav>
 
 <Separator />
 
 <Sheet.Root bind:open={isSheetOpen}>
-  <Sheet.Content side="left" class="w-[250px] sm:w-[300px]">
-    <Sheet.Header>
-      <Sheet.Title>Menu</Sheet.Title>
-      <Sheet.Description>Navigate through our app</Sheet.Description>
+  <Sheet.Content side="right" class="w-[250px] sm:w-[300px] bg-card">
+    <Sheet.Header class="border-b border-border p-4">
+      <Sheet.Title class="text-xl font-bold">Menu</Sheet.Title>
+      <Sheet.Description class="text-sm text-muted-foreground"
+        >Explore our app</Sheet.Description
+      >
     </Sheet.Header>
-    <div class="py-4">
+    <nav class="p-4 space-y-2">
       {#each navItems as item}
-        <Button
-          variant="ghost"
-          class="w-full text-left mb-2 flex items-center gap-2"
+        <a
           href={item.href}
+          class="flex items-center gap-3 p-2 rounded-md hover:bg-accent transition-colors duration-200"
         >
-          <svelte:component this={item.icon} size={18} />
-          {item.label}
-        </Button>
+          <svelte:component this={item.icon} size={20} class="text-primary" />
+          <span>{item.label}</span>
+        </a>
       {/each}
+      <Separator class="my-4" />
       {#if $user}
         <form action="/account/logout" method="POST">
-          <li>
-            <button type="submit">Logout now</button>
-          </li>
+          <Button
+            variant="ghost"
+            type="submit"
+            class="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
+          >
+            <LogOut size={20} class="mr-3" />
+            Logout
+          </Button>
         </form>
       {:else}
         <Button
-          variant="outline"
-          class="w-full mb-2 flex items-center gap-2"
+          variant="ghost"
+          class="w-full justify-start text-primary hover:text-primary hover:bg-primary/10"
           href="/account/login"
         >
-          <LogIn size={18} />
+          <LogIn size={20} class="mr-3" />
           Login
         </Button>
       {/if}
+    </nav>
+    <div class="absolute bottom-4 left-4 right-4">
+      <Separator class="mb-4" />
+      <div class="flex justify-between items-center">
+        <ThemeToggle />
+        <Button
+          variant="outline"
+          size="sm"
+          on:click={() => (isSheetOpen = false)}
+        >
+          Close
+        </Button>
+      </div>
     </div>
-    <Sheet.Footer>
-      <Button variant="outline" on:click={() => (isSheetOpen = false)}
-        >Close</Button
-      >
-    </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>
 
