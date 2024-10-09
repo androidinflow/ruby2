@@ -10,9 +10,17 @@ export async function GET({ params, locals }) {
 
     if (qrCode) {
       console.log("QR Code found :", qrCode.link);
+      // Ensure the link is a valid URL
+      let redirectUrl = qrCode.link;
+      if (
+        !redirectUrl.startsWith("http://") &&
+        !redirectUrl.startsWith("https://")
+      ) {
+        redirectUrl = "http://" + redirectUrl;
+      }
       return new Response(null, {
         status: 302,
-        headers: { Location: qrCode.link },
+        headers: { Location: redirectUrl },
       });
     } else {
       throw error(404, "QR Code not found");
