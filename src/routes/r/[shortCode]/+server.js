@@ -8,25 +8,21 @@ export async function GET({ params, locals }) {
       .collection("qrcodes")
       .getFirstListItem(`shortCode="${shortCode}"`);
 
-    if (qrCode) {
-      console.log("QR Code found :", qrCode.link);
-      // Ensure the link is a valid URL
-      let redirectUrl = qrCode.link;
-      if (
-        !redirectUrl.startsWith("http://") &&
-        !redirectUrl.startsWith("https://")
-      ) {
-        redirectUrl = "http://" + redirectUrl;
-      }
-      return new Response(null, {
-        status: 302,
-        headers: { Location: redirectUrl },
-      });
-    } else {
+    if (!qrCode) {
       throw error(404, "QR Code not found");
     }
+
+    let redirectUrl = qrCode.link;
+    if (!redirectUrl.startsWith("http")) {
+      redirectUrl = "http://" + redirectUrl;
+    }
+
+    return new Response(null, {
+      status: 302,
+      headers: { Location: redirectUrl },
+    });
   } catch (err) {
-    console.error("Error fetching QR code:", err);
+    console.error("Error:", err);
     throw error(500, "Internal Server Error");
   }
 }
