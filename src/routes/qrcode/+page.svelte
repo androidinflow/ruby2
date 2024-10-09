@@ -55,10 +55,8 @@
   <title>QR Code Generator</title>
 </svelte:head>
 
-<div class="container mx-auto p-4">
-  <h1 class="text-3xl font-bold mb-6">QR Code Generator</h1>
-
-  <Card class="mb-8">
+<div class="container mx-auto p-4 space-y-8">
+  <Card>
     <CardHeader>
       <CardTitle>Create New QR Code</CardTitle>
     </CardHeader>
@@ -68,35 +66,35 @@
         action="?/create"
         use:enhance
         on:submit={handleSubmit}
+        class="space-y-4"
       >
-        <Label for="newQRCode">Enter URL for QR Code</Label>
-        <Input
-          type="text"
-          id="newQRCode"
-          name="link"
-          bind:value={newQRCode}
-          placeholder="e.g., google.com or https://www.example.com"
-          required
-          class="mb-4"
-        />
+        <div class="space-y-2">
+          <Label for="newQRCode">Enter URL for QR Code</Label>
+          <Input
+            type="text"
+            id="newQRCode"
+            name="link"
+            bind:value={newQRCode}
+            placeholder="e.g., google.com or https://www.example.com"
+            required
+          />
+        </div>
         <Button type="submit">Generate QR Code</Button>
       </form>
     </CardContent>
   </Card>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {#each data.qrcodes as qrcode (qrcode.id)}
       <Card>
-        <CardHeader>
-          <CardTitle>QR Code for: {qrcode.link}</CardTitle>
-        </CardHeader>
-        <CardContent>
+        <CardHeader></CardHeader>
+        <CardContent class="space-y-4">
           <img
             src={baseUrl + qrcode.id + "/" + qrcode.qrcode}
             alt={qrcode.link}
-            class="w-26"
+            class="w-full max-w-[200px] mx-auto"
           />
-          <p class="mt-2">Scan to visit: {qrcode.link}</p>
+          <p class="text-sm text-center">Scan to visit: {qrcode.link}</p>
         </CardContent>
         <CardFooter class="flex justify-between">
           {#if editingQRCode && editingQRCode.id === qrcode.id}
@@ -104,8 +102,11 @@
               method="POST"
               action="?/update"
               use:enhance
-              on:submit={handleSubmit}
-              class="w-full"
+              on:submit={(event) => {
+                handleSubmit(event);
+                editingQRCode = null;
+              }}
+              class="w-full space-y-4"
             >
               <input type="hidden" name="id" value={qrcode.id} />
               <Input
@@ -113,7 +114,6 @@
                 name="link"
                 value={editingQRCode.link}
                 required
-                class="mb-2"
                 placeholder="e.g., google.com or https://www.example.com"
               />
               <div class="flex justify-between">

@@ -6,12 +6,11 @@
   import {
     Menu,
     Home,
-    Info,
-    Briefcase,
     LogIn,
     Candy,
     LogOut,
     Swords,
+    QrCode,
   } from "lucide-svelte";
   import * as Sheet from "$lib/components/ui/sheet";
   import { afterNavigate } from "$app/navigation";
@@ -23,11 +22,9 @@
 
   const navItems = [
     { label: "Home", icon: Home, href: "/" },
-    { label: "About", icon: Info },
-    { label: "Projects", icon: Briefcase },
-
     { label: "Candy", icon: Candy, href: "/candy" },
     { label: "Clash", icon: Swords, href: "/clash" },
+    { label: "QR Code", icon: QrCode, href: "/qrcode" },
   ];
 
   afterNavigate(() => {

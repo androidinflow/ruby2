@@ -3,9 +3,12 @@ import QRCode from "qrcode";
 
 const YOUR_APP_URL = "https://candy.redruby.one";
 
-export const load = async ({ locals }) => {
+export const load = async ({ locals, url }) => {
   if (!locals.user) {
-    throw redirect(302, "/account/login");
+    throw redirect(
+      302,
+      "/account/login?error=You need to login to access the QR code page"
+    );
   }
 
   const qrcodes = await locals.pocketbase.collection("qrcodes").getFullList({
