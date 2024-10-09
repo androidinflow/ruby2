@@ -1,7 +1,7 @@
 import { error, redirect } from "@sveltejs/kit";
 import QRCode from "qrcode";
 
-const YOUR_APP_URL = "https://redruby.one";
+const YOUR_APP_URL = "https://candy.redruby.one";
 
 export const load = async ({ locals }) => {
   if (!locals.user) {
